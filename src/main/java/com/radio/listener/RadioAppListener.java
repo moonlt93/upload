@@ -30,8 +30,12 @@ public class RadioAppListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce)  { 
          // TODO Auto-generated method stub
         ServletContext app = sce.getServletContext();
+        String contextRoot = app.getContextPath(); 
         
-        String contextRoot = app.getContextPath();  
+		String staticPath= "https://objectstorage.ap-seoul-1.oraclecloud.com/n/cnca7kbvyqaq/b/bucket-20210216-1417/o/";
+
+		app.setAttribute("root", contextRoot);
+		app.setAttribute("staticPath", staticPath);
         
         app.setAttribute("root", contextRoot);
     }

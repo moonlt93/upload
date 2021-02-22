@@ -5,7 +5,6 @@ import java.util.List;
 import com.radio.domain.CommentVO;
 
 
-
 public interface CommentMapper {
 	public List<CommentVO> getList();
 
