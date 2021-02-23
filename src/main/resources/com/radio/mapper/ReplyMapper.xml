@@ -6,26 +6,26 @@
 <mapper namespace="com.radio.mapper.ReplyMapper">
 
 	<insert id="insert">
-		INSERT INTO tbl_reply (rno, bno, reply, replyer)
-		VALUES (seq_reply.nextval, #{bno}, #{reply}, #{replyer})
+		INSERT INTO tbl_reply2 (rno, bno, reply, replyer)
+		VALUES (seq_reply2.nextval, #{bno}, #{reply}, #{replyer})
 	</insert>
 
 	<select id="read" resultType="com.radio.domain.ReplyVO">
-		SELECT * FROM tbl_reply WHERE rno = #{rno}
+		SELECT * FROM tbl_reply2 WHERE rno = #{rno}
 	</select>
 	
 	<delete id="delete">
-		DELETE FROM tbl_reply WHERE rno = #{rno}
+		DELETE FROM tbl_reply2 WHERE rno = #{rno}
 	</delete>
 
 	<update id="update">
-		UPDATE tbl_reply SET reply = #{reply}, updatedate = sysdate
+		UPDATE tbl_reply2 SET reply = #{reply}, updatedate = sysdate
 		WHERE rno = #{rno}
 	</update>	
 	
 	<select id="getListWithPaging" resultType="com.radio.domain.ReplyVO">
 		SELECT rno, bno, reply, replyer, replyDate, updatedate
-		FROM tbl_reply
+		FROM tbl_reply2
 		WHERE bno = #{bno}
 		ORDER BY rno ASC
 	</select>

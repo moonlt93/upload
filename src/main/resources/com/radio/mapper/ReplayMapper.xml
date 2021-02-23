@@ -26,7 +26,7 @@
 
 	<select id="getList" resultType="com.radio.domain.ReplayVO">
 <![CDATA[
-		select * from tbl_board where bno > 0
+		select * from tbl_Replay where bno > 0
 ]]>		
 		
 	</select>
@@ -35,15 +35,15 @@
 <![CDATA[	
 	SELECT
 	 bno, title, content,
-	 writer, regdate, updatedate, replycnt
+	 writer, regdate, updatedate
 	FROM
 	 (
 	  SELECT 
 	   ROW_NUMBER() OVER (ORDER BY bno DESC) rn,
 	   bno, title, content, writer,
-	   regdate, updatedate, replycnt
+	   regdate, updatedate
 	  FROM
-	   tbl_board
+	   tbl_Replay
 ]]>
 	
 	<include refid="criteria"></include>
@@ -57,29 +57,29 @@
 	
 	
 	<insert id="insert">
-		insert into tbl_board (bno, title, content, writer,filename)
-		values (seq_board.nextval, #{title}, #{content}, #{writer},#filename)
+		insert into tbl_Replay (bno, title, content, writer,filename)
+		values (seq_REboard.nextval, #{title}, #{content}, #{writer},#{filename})
 	</insert>
 	
 	<insert id="insertSelectKey">
 		<selectKey keyProperty="bno" order="BEFORE" resultType="long">
-		select seq_board.nextval from dual
+		select seq_REboard.nextval from dual
 		</selectKey>
 	
-		insert into tbl_board (bno, title, content, writer)
-		values (#{bno }, #{title}, #{content}, #{writer})
+		insert into tbl_Replay (bno, title, content, writer,filename)
+		values (#{bno }, #{title}, #{content}, #{writer},#{filename})
 	</insert>
 	
 	<select id="read" resultType="com.radio.domain.ReplayVO">
-		select * from tbl_board where bno = #{bno}
+		select * from tbl_Replay where bno = #{bno}
 	</select>
 	
 	<delete id="delete">
-		delete from tbl_board where bno = #{bno}
+		delete from tbl_replay where bno = #{bno}
 	</delete>
 	
 	<update id="update">
-	UPDATE tbl_board
+	UPDATE tbl_Replay
 	SET
 	  title = #{title},
 	  content = #{content},
@@ -91,12 +91,12 @@
 	</update>
 	
 	<select id="getTotalCount" resultType="int">
-	SELECT count(*) FROM tbl_board	
+	SELECT count(*) FROM tbl_replay	
 	<include refid="criteria"></include>
 	</select>
 	
 	<update id="updateReplyCnt">
-	UPDATE tbl_board SET replycnt = replycnt + #{amount}
+	UPDATE tbl_replay SET replycnt = replycnt + #{amount}
 	WHERE bno = #{bno}
 	</update>
 </mapper>

@@ -24,6 +24,7 @@
 		
 		var result = '${result}';
 		var message = '${message}';
+		var actionForm = $("#actionForm");
 		
 		//checkModal(result);
 		checkModal2(message);
@@ -49,7 +50,7 @@
 			$("#myModal").modal("show");
 		}
 		
-		var actionForm = $("#actionForm");
+		
 		$(".pagination a").click(function(e) {
 			e.preventDefault();
 			
@@ -58,13 +59,14 @@
 			actionForm.submit();
 		});
 		
-		$("#btn-4").click(function() {
-			$.ajax("/controller/replay/list", {
-				type: "get"
-			}).done(function(data) {
-				console.log(data);
-			});
-		
+		$("button[data-oper='register']").click(function(e){
+			e.preventDefault();
+			
+			actionForm.attr("action", root + "/replay/register");
+			actionForm.submit();
+			
+			
+		});
 	
 		
 	});
@@ -73,8 +75,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-<u:navbar></u:navbar>
 
 <div class="container-sm">
 
@@ -118,11 +118,10 @@
       </tbody>
     </table>
     	
-    	
-  <a href="${root }/replay/register">등록</a>
-		<form  action="${root }/board/register" method="post">
-		<button  id="#btn-4"class="btn btn-primary">등록</button>
-		</form>
+    	<a href="${root }/replay/register">등록</a>
+
+ 
+ 
   </div>
 </div>
 
